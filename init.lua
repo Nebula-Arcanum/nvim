@@ -177,12 +177,15 @@ cmd("set pumheight=80")
 cmd("set winblend=20")
 
 opt.relativenumber = true
+opt.wrap = true
+opt.swapfile = false
 
 ---VimTeX---
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_fold_enabled = true
 
-
+--Requred command for mini.snippets snippets to show up in completion menu
+cmd("lua MiniSnippets.start_lsp_server()")
 
 ---=== Keymaps ===---
 vim.g.mapleader = " "

@@ -1,0 +1,23 @@
+{
+"Snippet": {
+   "prefix":"snip",
+   "body": [
+      "\"${1:Name}\": {",
+      "\t\"prefix\":\"${2:Prefix}\",",
+      "\t\"body\": \"$3\"",
+      "}"
+   ]
+},
+"Multi line snippet": {
+   "prefix": "mlsnip",
+   "body": [
+      "\"${1:Name}\": {",
+      "\t\"prefix\":\"${2:Prefix}\",",
+      "\t\"body\": [",
+      "\t\t\"$3\"",
+      "\t\t\"$4\"",
+      "\t]",
+      "}"
+   ]
+}
+}
