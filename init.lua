@@ -19,17 +19,41 @@ require('mini.deps').setup({ path = { package = path_package } })
 --= Text editing =--
 require('mini.ai').setup()
 require('mini.comment').setup()
--- require('mini.completion').setup() PRIORITY
+require('mini.completion').setup()
 -- require('mini.keymap').setup()
 require('mini.move').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
--- require('mini.snippets').setup() PRIORITY
+require('mini.snippets').setup()
+local gen_loader = require('mini.snippets').gen_loader
+require('mini.snippets').setup({
+  snippets = {
+    -- Load custom file with global snippets first (adjust for Windows)
+    gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+
+    -- Load snippets based on current language by reading files from
+    -- "snippets/" subdirectories from 'runtimepath' directories.
+    gen_loader.from_lang(),
+  },
+})
+
+
 require('mini.splitjoin').setup()
 require('mini.surround').setup()
 
 --= General workflow =--
--- require('mini.basics').setup()
+require('mini.basics').setup({
+	options = {
+		basic = true,
+		extra_ui = false,
+      win_borders = 'double'
+	},
+	mappings = {
+		windows = true,
+		move_with_alt = true,
+      option_toggle_prefix = [[,]]
+	}
+})
 require('mini.bracketed').setup()
 require('mini.bufremove').setup()
 
@@ -39,6 +63,8 @@ miniclue.setup({
 		-- Leader triggers
 		{ mode = 'n', keys = '<Leader>' },
 		{ mode = 'x', keys = '<Leader>' },
+		{ mode = 'n', keys = '\\' },
+		{ mode = 'x', keys = '\\' },
 
 		-- Built-in completion
 		{ mode = 'i', keys = '<C-x>' },
@@ -92,7 +118,8 @@ require('mini.files').setup()
 -- require('mini.jump').setup()
 -- require('mini.jump2d').setup()
 -- require('mini.misc').setup()
-require('mini.pick').setup() -- require('mini.sessions').setup()
+require('mini.pick').setup()
+-- require('mini.sessions').setup()
 -- require('mini.visits').setup()
 
 --= Appearance =--
@@ -127,8 +154,9 @@ add({source = 'scottmckendry/cyberdream.nvim'})
 
 
 ---=== Options ===---
-vim.opt.termguicolors = true
-vim.g.vimtex_view_method = "zathura"
+local cmd = vim.cmd
+local opt = vim.opt
+opt.termguicolors = true
 --==Colorscheme==--
 --Colorscheme config must be set before the colorscheme is loaded, otherwise it will not be applied
 require("cyberdream").setup({
@@ -136,7 +164,23 @@ require("cyberdream").setup({
 		bg = "#000000"
 	}
 })
-vim.cmd("colorscheme cyberdream")
+cmd("colorscheme cyberdream")
+
+--=Tabs=--
+cmd("set expandtab")
+cmd("set tabstop=3")
+cmd("set softtabstop=3")
+cmd("set shiftwidth=3")
+
+cmd("set pumblend=80")
+cmd("set pumheight=80")
+cmd("set winblend=20")
+
+opt.relativenumber = true
+
+---VimTeX---
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_fold_enabled = true
 
 
 
@@ -153,7 +197,3 @@ key( 'n', '<leader>fh', ":Pick help<CR>", { desc = "Pick help" })
 
 --== File tree ==--
 key( 'n', '<leader>t', ":lua MiniFiles.open()<CR>", {})
-
---== Movement ==--
-key( {'n', 'x'}, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-key( {'n', 'x'}, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = "Down", expr = true, silent = true })
