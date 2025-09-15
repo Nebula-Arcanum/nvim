@@ -1,0 +1,30 @@
+{
+"Fraction": {
+   "prefix":"//",
+   "body": "\\frac{${1:Numerator}{${2:Denominator}}$0}"
+},
+"Velocity": {
+   "prefix":"ms",
+   "body": "\\text{ms}^{-1}"
+},
+"Acceleration": {
+   "prefix":"ms",
+   "body": "\\text{ms}^{-2}"
+},
+"Environment": {
+   "prefix":"beg",
+   "body": [
+      "\\begin{$1}",
+      "\t$0",
+      "\\end{$1}"
+   ]
+},
+"Enumerate": {
+   "prefix":"enum",
+   "body": [
+      "\\begin{enumerate}",
+      "\t\\item $1",
+      "\\end{enumerate}"
+   ]
+}
+}
