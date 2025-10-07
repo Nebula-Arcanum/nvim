@@ -1,7 +1,7 @@
 {
 "Fraction": {
    "prefix":"//",
-   "body": "\\frac{${1:Numerator}{${2:Denominator}}$0}"
+   "body": "\\frac{${1:Numerator}}{${2:Denominator}}$0"
 },
 "Velocity": {
    "prefix":"ms",

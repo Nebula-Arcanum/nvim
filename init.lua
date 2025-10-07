@@ -150,6 +150,7 @@ local add = MiniDeps.add
 
 add({source = 'lervag/vimtex'})
 add({source = 'scottmckendry/cyberdream.nvim'})
+add({source = 'MeanderingProgrammer/render-markdown.nvim'})
 
 
 
